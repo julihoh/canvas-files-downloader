@@ -4,6 +4,7 @@ import requests
 import urllib.request
 
 ACCESS_TOKEN = config('ACCESS_TOKEN')
+CANVAS_URL= config('CANVAS_URL')
 
 headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
 
@@ -22,7 +23,7 @@ print('\n\n\n')
 courses = []
 
 # get courses
-next_url = 'https://psu.instructure.com/api/v1/courses'
+next_url = f'https://{CANVAS_URL}/api/v1/courses'
 while next_url:
     response = requests.get(next_url, headers=headers)
     if not 'Link' in response.headers:
@@ -42,7 +43,7 @@ print('\n\n\n')
 
 # download files for a course
 for course in courses:
-    next_url = 'https://psu.instructure.com/api/v1/courses/{}/files'.format(course['id'])
+    next_url = f'https://{CANVAS_URL}/api/v1/courses/{course["id"]}/files'
     while next_url:
         response = requests.get(next_url, headers=headers)
         if not 'Link' in response.headers:
@@ -72,7 +73,7 @@ print('\n\n\n')
 groups = []
 
 # get groups
-next_url = 'https://psu.instructure.com/api/v1/users/self/groups'
+next_url = f'https://{CANVAS_URL}/api/v1/users/self/groups'
 while next_url:
     response = requests.get(next_url, headers=headers)
     if not 'Link' in response.headers:
@@ -92,7 +93,7 @@ print('\n\n\n')
 
 # download files for a group
 for group in groups:
-    next_url = 'https://psu.instructure.com/api/v1/groups/{}/files'.format(group['id'])
+    next_url = f'https://{CANVAS_URL}/api/v1/groups/{group["id"]}/files'
     while next_url:
         response = requests.get(next_url, headers=headers)
         if not 'Link' in response.headers:
@@ -113,7 +114,7 @@ for group in groups:
             if not os.path.exists(f_path):
                 urllib.request.urlretrieve(f['url'], f_path)
         group_users = []
-        next_group_users_url = 'https://psu.instructure.com/api/v1/groups/{}/users'.format(group['id'])
+        next_group_users_url = f'https://{CANVAS_URL}/api/v1/groups/{group["id"]}/users'
         while next_group_users_url:
             response = requests.get(next_group_users_url, headers=headers)
             if not 'Link' in response.headers:
@@ -143,7 +144,7 @@ print('\n\n\n')
 submissions = []
 
 # get course submissions
-next_url = 'https://psu.instructure.com/api/v1/users/self/folders'
+next_url = f'https://{CANVAS_URL}/api/v1/users/self/folders'
 while next_url:
     response = requests.get(next_url, headers=headers)
     if not 'Link' in response.headers:
@@ -163,7 +164,7 @@ print('\n\n\n')
 
 # download course submissions
 for submission in submissions:
-    next_url = 'https://psu.instructure.com/api/v1/folders/{}/files'.format(submission['id'])
+    next_url = f'https://{CANVAS_URL}/api/v1/folders/{submission["id"]}/files'
     while next_url:
         response = requests.get(next_url, headers=headers)
         if not 'Link' in response.headers:

@@ -8,10 +8,15 @@ Downloads your Canvas course files, group submissions, and user submissions
 * Create `.env`
   * Generate an access token for testing
     * https://canvas.instructure.com/doc/api/file.oauth.html#manual-token-generation
-  * ```
-    ACCESS_TOKEN=
-    ```
+    * ```
+      ACCESS_TOKEN=
+      ```
+    
     * Put your access token after the equals sign
+  
+  * Setup canvas installation url: ```
+      CANVAS_URL=your canvas url (eg. canvas.vu.nl)
+   ```
 * Create a virtual environment and activate it
   * `python3 -m venv venv`
   * `source venv/bin/activate`
