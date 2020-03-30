@@ -8,7 +8,6 @@ CANVAS_URL= config('CANVAS_URL')
 
 headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
 
-# TODO make psu.instructure.com changeable
 # TODO refactor code
 
 root_directory = os.getcwd()
