@@ -5,13 +5,13 @@ import urllib.request
 
 ACCESS_TOKEN = config('ACCESS_TOKEN')
 CANVAS_URL= config('CANVAS_URL')
+FOLDER = config('FOLDER', default='./files')
 
 headers = {'Authorization': 'Bearer ' + ACCESS_TOKEN}
 
 # TODO refactor code
 
-root_directory = os.getcwd()
-files_directory = os.path.join(root_directory, 'files')
+files_directory = FOLDER
 
 courses_directory = os.path.join(files_directory, 'courses')
 if not os.path.exists(courses_directory):
