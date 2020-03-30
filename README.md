@@ -18,6 +18,10 @@ Downloads your Canvas course files, group submissions, and user submissions
   ```
       CANVAS_URL=your canvas url (eg. canvas.vu.nl)
    ```
+  * (optional) targer folder (./files by default):
+  ```
+      FOLDER=~/canvas_files
+   ```
 * Create a virtual environment and activate it
   * `python3 -m venv venv`
   * `source venv/bin/activate`
