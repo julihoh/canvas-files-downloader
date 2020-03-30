@@ -14,7 +14,8 @@ Downloads your Canvas course files, group submissions, and user submissions
     
     * Put your access token after the equals sign
   
-  * Setup canvas installation url: ```
+  * Setup canvas installation url:
+  ```
       CANVAS_URL=your canvas url (eg. canvas.vu.nl)
    ```
 * Create a virtual environment and activate it
