@@ -59,6 +59,9 @@ for course in courses:
         if not os.path.exists(course_directory):
             os.makedirs(course_directory)
         for f in files:
+            if f['url'] == '':
+                # can happen if file is not (yet) published
+                continue
             print(f['display_name'], f['url'], f['id'])
             f_path = os.path.join(course_directory, f['display_name'])
             if not os.path.exists(f_path):
