@@ -30,3 +30,9 @@ Downloads your Canvas course files, group submissions, and user submissions
 * Run the script
   * `python canvas-files-downloader.py`
 * Files will be downloaded to `files/` or the folder specified in the configuration
+* Usage with multiple canvas accounts/installations: simply call the script for each installation url and/or authentication token from a script:
+```
+ACCESS_TOKEN=... CANVAS_URL=first_url python canvas-files-download.py
+ACCESS_TOKEN=... CANVAS_URL=second_url python canvas-files-download.py
+```
+
