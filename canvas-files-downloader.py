@@ -145,9 +145,9 @@ for group in groups:
         if not os.path.exists(group_directory):
             os.makedirs(group_directory)
         for f in files:
-            print(f['display_name'], f['url'], f['id'])
             f_path = os.path.join(group_directory, f['display_name'])
             if not os.path.exists(f_path):
+                print(f['display_name'], f['url'], f['id'])
                 urllib.request.urlretrieve(f['url'], f_path)
         group_users = []
         next_group_users_url = f'https://{CANVAS_URL}/api/v1/groups/{group["id"]}/users'
@@ -216,7 +216,7 @@ for submission in submissions:
         if not os.path.exists(submission_directory):
             os.makedirs(submission_directory)
         for f in files:
-            print(f['display_name'], f['url'], f['id'])
             f_path = os.path.join(submission_directory, f['display_name'])
             if not os.path.exists(f_path):
+                print(f['display_name'], f['url'], f['id'])
                 urllib.request.urlretrieve(f['url'], f_path)
