@@ -29,4 +29,4 @@ Downloads your Canvas course files, group submissions, and user submissions
   * `pip install -r requirements.txt`
 * Run the script
   * `python canvas-files-downloader.py`
-* Files will be downloaded to `files/`
+* Files will be downloaded to `files/` or the folder specified in the configuration
