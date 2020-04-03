@@ -61,10 +61,44 @@ for course in courses:
             if f['url'] == '':
                 # can happen if file is not (yet) published
                 continue
-            print(f['display_name'], f['url'], f['id'])
             f_path = os.path.join(course_directory, f['display_name'])
             if not os.path.exists(f_path):
+                print(f['display_name'], f['url'], f['id'])
                 urllib.request.urlretrieve(f['url'], f_path)
+print('\n\n\n')
+
+# download modules for a course
+for course in courses:
+    next_url = f'https://{CANVAS_URL}/api/v1/courses/{course["id"]}/modules?include=items'
+    while next_url:
+        response = requests.get(next_url, headers=headers)
+        if not 'Link' in response.headers:
+            break
+        links = requests.utils.parse_header_links(response.headers['Link'].rstrip('>').replace('>,<', ',<'))
+        next_url = None
+        for link in links:
+            if link['rel'] == 'next':
+                next_url = link['url']
+                break
+        modules = response.json()
+        course_directory = os.path.join(courses_directory, course['name'])
+        if not os.path.exists(course_directory):
+            os.makedirs(course_directory)
+        for module in modules:
+            module_path = os.path.join(course_directory, module['name'])
+            if not os.path.exists(module_path ):
+                os.makedirs(module_path )
+            for module_item in module['items']:
+                if module_item['type'] != 'File':
+                    continue
+                f = requests.get(module_item['url'], headers=headers).json()
+                if f['url'] == '':
+                    # can happen if file is not (yet) published
+                    continue
+                f_path = os.path.join(module_path, f['display_name'])
+                if not os.path.exists(f_path):
+                    print(f['display_name'], f['url'], f['id'])
+                    urllib.request.urlretrieve(f['url'], f_path)
 
 groups_directory = os.path.join(files_directory, 'groups')
 if not os.path.exists(groups_directory):
