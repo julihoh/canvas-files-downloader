@@ -2,6 +2,7 @@ from decouple import config
 import os
 import requests
 import urllib.request
+import datetime
 
 ACCESS_TOKEN = config('ACCESS_TOKEN')
 CANVAS_URL= config('CANVAS_URL')
@@ -54,7 +55,7 @@ for course in courses:
                 next_url = link['url']
                 break
         files = response.json()
-        course_directory = os.path.join(courses_directory, course['name'])
+        course_directory = os.path.join(courses_directory, f'{course["name"]} {datetime.datetime.strptime(course["start_at"], "%Y-%m-%dT%H:%M:%SZ").year}')
         if not os.path.exists(course_directory):
             os.makedirs(course_directory)
         for f in files:
@@ -81,7 +82,7 @@ for course in courses:
                 next_url = link['url']
                 break
         modules = response.json()
-        course_directory = os.path.join(courses_directory, course['name'])
+        course_directory = os.path.join(courses_directory, f'{course["name"]} {datetime.datetime.strptime(course["start_at"], "%Y-%m-%dT%H:%M:%SZ").year}')
         if not os.path.exists(course_directory):
             os.makedirs(course_directory)
         for module in modules:
